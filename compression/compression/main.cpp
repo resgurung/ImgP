@@ -63,14 +63,15 @@ int main(int argc, const char * argv[])
     //FFT is implemented to show avaiable data redundency
     Mat padded;
     //expand the image into optimal size
-    int m = getOptimalDFTSize(original.rows);
-    int n = getOptimalDFTSize(original.cols);
+    int m = getOptimalDFTSize(processed.rows);
+    int n = getOptimalDFTSize(processed.cols);
     //On the border add zero values
   
-    copyMakeBorder(original, padded, 0, m - original.rows, 0, n - original.cols, BORDER_CONSTANT, Scalar::all(0));
+    copyMakeBorder(processed, padded, 0, m - processed.rows, 0, n - processed.cols, BORDER_CONSTANT, Scalar::all(0));
     
     //The frequency domains range is much larger than its spatial counterpart. Therefore, we will store these in a float format.
     
+    //Mat planes[] = {Mat_<float>(padded), Mat::zeros(padded.size(), CV_32F)};
     Mat planes[] = {Mat_<float>(padded), Mat::zeros(padded.size(), CV_32F)};
     Mat complexImg;
     merge(planes,2, complexImg); // Add to the expanded another plane with zeros
@@ -88,7 +89,7 @@ int main(int argc, const char * argv[])
     Mat magImg = planes[0];
     
     // switch to logarithmic scale
-    magImg +=Scalar::all(0);
+    magImg +=Scalar::all(1);
     log(magImg, magImg);
     
      // crop the spectrum, if it has an odd number of rows or columns
@@ -98,6 +99,32 @@ int main(int argc, const char * argv[])
     int cx = magImg.cols/2;
     int cy = magImg.rows/2;
     
+    Mat a1(  magImg , Rect(0,0,cx,cy));     // Top-Left
+    Mat a2(  magImg , Rect(cx,0,cx,cy));    // Top-Right
+    Mat a3(  magImg , Rect(0,cy,cx,cy));    // Bottom-Left
+    Mat a4(  magImg , Rect(cx,cy,cx,cy));   // Bottom-Right
+    
+    Mat temp;
+       // swap quadrants (Top-Left with Bottom-Right)
+    a1.copyTo(temp);
+    a3.copyTo(a1);
+    temp.copyTo(a3);
+    
+    // swap quadrant (Top-Right with Bottom-Left)
+    a1.copyTo(temp);
+    a2.copyTo(a1);
+    temp.copyTo(a2);
+    
+    normalize(magImg, magImg, 0 ,1, CV_MINMAX);
+    //normalize(phaseVals, phaseVals, 0, 1, CV_MINMAX);
+  
+    
+   // Show the result
+    imshow("Spectrum Magnitude", magImg);
+    waitKey();
+    
+    
+    
     /**
      Vector/scalar transform the image    ********[QUANTIZER]********
      */
@@ -105,6 +132,16 @@ int main(int argc, const char * argv[])
     /**
      Houghman coding/line coding transform the image    ********[ENCODER]********
      */
+   
+    /**
+     Decompress    ********[DECODER]********
+     */
+   
+    /**
+     Decompress    ********[INVERSE]********
+     */
+    
+    
     //main
     return 0;
  
