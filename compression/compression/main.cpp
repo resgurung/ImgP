@@ -100,15 +100,15 @@ int main(int argc, const char * argv[])
     int cx = magImg.cols/2;
     int cy = magImg.rows/2;
     
-    Mat a1(  magImg , Rect(0,0,cx,cy));     // Top-Left
-    Mat a2(  magImg , Rect(cx,0,cx,cy));    // Top-Right
-    Mat a3(  magImg , Rect(0,cy,cx,cy));    // Bottom-Left
-    Mat a4(  magImg , Rect(cx,cy,cx,cy));   // Bottom-Right
+    Mat a0(  magImg , Rect(0,0,cx,cy));     // Top-Left
+    Mat a1(  magImg , Rect(cx,0,cx,cy));    // Top-Right
+    Mat a2(  magImg , Rect(0,cy,cx,cy));    // Bottom-Left
+    Mat a3(  magImg , Rect(cx,cy,cx,cy));   // Bottom-Right
     
     Mat temp;
        // swap quadrants (Top-Left with Bottom-Right)
-    a1.copyTo(temp);
-    a3.copyTo(a1);
+    a0.copyTo(temp);
+    a3.copyTo(a0);
     temp.copyTo(a3);
     
     // swap quadrant (Top-Right with Bottom-Left)
@@ -117,7 +117,7 @@ int main(int argc, const char * argv[])
     temp.copyTo(a2);
     
     normalize(magImg, magImg, 0 ,1, CV_MINMAX);
-    //normalize(phaseVals, phaseVals, 0, 1, CV_MINMAX);
+
   
     
    // Show the result
