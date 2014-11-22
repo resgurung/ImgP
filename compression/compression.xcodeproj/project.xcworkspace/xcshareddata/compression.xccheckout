@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>53E1ED3F-466B-4D63-BC62-1F7BBA5832D9</string>
+	<key>IDESourceControlProjectName</key>
+	<string>compression</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>54AC9450-49F2-4025-A9DF-22D57111F89D</key>
+		<string>https://github.com/resgurung/ImgP.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>compression/compression.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>54AC9450-49F2-4025-A9DF-22D57111F89D</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/resgurung/ImgP.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>54AC9450-49F2-4025-A9DF-22D57111F89D</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>54AC9450-49F2-4025-A9DF-22D57111F89D</string>
+			<key>IDESourceControlWCCName</key>
+			<string>k</string>
+		</dict>
+	</array>
+</dict>
+</plist>

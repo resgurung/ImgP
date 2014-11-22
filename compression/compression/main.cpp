@@ -1,11 +1,10 @@
-//
-//  main.cpp
-//  compression
-//  Compress a given image and decompress
-//  MAPPER->QUANTIZER->ENCODER->INVERSE->DECODER
-//  Created by Resham Gurung on 20/11/2014.
-//  Copyright (c) 2014 Rg. All rights reserved.
-//
+/**
+    Compression & Decompression
+    Compress a given image and decompress
+    MAPPER->QUANTIZER->ENCODER->INVERSE->DECODER
+    Created by Resham Gurung on 20/11/2014.
+    Copyright (c) 2014 Rg. All rights reserved.
+*/
 
 #include <iostream>
 #include <opencv2/core/core.hpp>
@@ -23,7 +22,7 @@ int main(int argc, const char * argv[])
      Mat processed;
     char checkForAnyKeyPressed;       //pressed any key to exit the window
     //Read the image from the file
-    original = imread("/Users/robingurung/Desktop/image analysis/image.jpg");
+    original = imread("/Users/robingurung/Desktop/k/compression/image.jpg");
     //Check if the image data is loaded
     if(!original.data)
     {
@@ -56,7 +55,7 @@ int main(int argc, const char * argv[])
     /**
      FFT/DCT/PCA transform the image    ********[MAPPER]********
      */
-    //DCT is implemented to show avaiable data redundency
+    //FFT is implemented to show avaiable data redundency
     Mat padded;
     int m = getOptimalDFTSize(original.rows);
     int n = getOptimalDFTSize(original.cols);
