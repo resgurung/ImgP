@@ -2,8 +2,13 @@
     Compression & Decompression
     Compress a given image and decompress
     MAPPER->QUANTIZER->ENCODER->INVERSE->DECODER
+    Image size -> 551,996 bytes (553 KB )
+    Dimension -> 1920x1018
+    Image Src ->http://blog.jimdo.com/wp-content/uploads/2014/01/tree-247122.jpg
+    Note: I do not own this image
     Created by Resham Gurung on 20/11/2014.
     Copyright (c) 2014 Rg. All rights reserved.
+ 
 */
 
 #include <iostream>
