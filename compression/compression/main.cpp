@@ -62,8 +62,41 @@ int main(int argc, const char * argv[])
      */
     //FFT is implemented to show avaiable data redundency
     Mat padded;
+    //expand the image into optimal size
     int m = getOptimalDFTSize(original.rows);
     int n = getOptimalDFTSize(original.cols);
+    //On the border add zero values
+  
+    copyMakeBorder(original, padded, 0, m - original.rows, 0, n - original.cols, BORDER_CONSTANT, Scalar::all(0));
+    
+    //The frequency domains range is much larger than its spatial counterpart. Therefore, we will store these in a float format.
+    
+    Mat planes[] = {Mat_<float>(padded), Mat::zeros(padded.size(), CV_32F)};
+    Mat complexImg;
+    merge(planes,2, complexImg); // Add to the expanded another plane with zeros
+    
+    //DFT transform
+    
+    dft(complexImg, complexImg);   //ComplexImage fits in the source matrix
+    
+    //Transform the real and complex value to magnitude
+    // compute the magnitude and switch to logarithmic scale
+    // => log(1 + sqrt(Re(DFT(I))^2 + Im(DFT(I))^2))
+    
+    split(complexImg, planes);
+    magnitude(planes[0], planes[1], planes[0]);
+    Mat magImg = planes[0];
+    
+    // switch to logarithmic scale
+    magImg +=Scalar::all(0);
+    log(magImg, magImg);
+    
+     // crop the spectrum, if it has an odd number of rows or columns
+    magImg = magImg(Rect(0,0,magImg.cols & -2, magImg.rows & -2));
+
+    // rearrange the quadrants of Fourier image  so that the origin is at the image center
+    int cx = magImg.cols/2;
+    int cy = magImg.rows/2;
     
     /**
      Vector/scalar transform the image    ********[QUANTIZER]********
